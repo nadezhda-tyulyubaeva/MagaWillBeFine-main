@@ -1,0 +1,136 @@
+#header,.theme-toggle{
+    background: linear-gradient(#f0a1a1, #f0a1a1);
+    color: #7f510b;
+}
+
+.theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
+    fill: var(--header-link-color);
+    color: #f0a1a1;
+}
+
+
+
+#content {
+    font-family: 'Arimo', sans-serif;
+}
+
+.title-decoration{
+    background-color: #e7e7e7;
+}
+
+.module caption {
+    font-size: 0.8rem;
+    background-color: #ffdede;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #cbfdfd;
+}
+
+a:link, a:visited {
+    color: #614922;
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+}
+
+table {
+    border-collapse: collapse;
+    border-color: #f4e9d7;;
+}
+
+div.breadcrumbs {
+    background: #f5dddd;
+    padding: 10px 40px;
+    border: none;
+    color: var(--breadcrumbs-fg);
+    text-align: left;
+}
+
+div.breadcrumbs a {
+    color: var(--breadcrumbs-link-fg);
+}
+
+.module h2{
+    font-size: 0.75rem;
+    font-family: 'Arimo', sans-serif;
+    font-weight: 300;
+    background: #ffefef;
+    color: #0e0e0e;
+}
+
+a.section:link, a.section:visited {
+    color: #0e0e0e;
+    text-decoration: none;
+    font-style: inherit;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    border: none;
+    font-family: 'Arimo', sans-serif;
+    font-weight: 400;
+    background: #f0a1a1;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #9a9a9a;
+    padding: 10px 15px;
+    font-family: 'Arimo', sans-serif;
+    border: none;
+    border-radius: 4px;
+    color: var(--button-fg);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+body{
+    font-family: 'Arimo', sans-serif;
+
+}
+
+.selector-chosen h2 {
+    background: #bf9c64;
+    color: var(--header-link-color);
+}
+
+#branding h1 a:link, #branding h1 a:visited {
+    color: #0e0e0e;
+    font-family: 'Arimo', sans-serif;
+    font-style: initial;
+    font-size: 2rem;
+    vertical-align: hanging;
+}
+
+#header a:link, #header a:visited, #logout-form button {
+    color: #0e0e0e;
+}
+
+div.breadcrumbs a {
+    color: var(--breadcrumbs-link-fg);
+}
+
+#user-tools, #logout-form button {
+    padding: 0;
+    font-weight: 300;
+    font-family: 'Arimo', sans-serif;
+    color: #0e0e0e;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#content-related {
+    background: #fccac9;
+}
+
+.submit-row {
+    padding: 12px 14px 12px;
+    margin: 0 0 20px;
+    background: #a4a4a4;
+    border: 1px solid var(--hairline-color);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+

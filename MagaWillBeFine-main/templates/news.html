@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for post in object_list %}
+                    <div class="col" style="margin-bottom: 10px">
+
+                        <div class="card shadow-sm">
+                         <p class="card-text" align="center"><strong>{{ post.name }}</strong></p>
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="bd-placeholder-img card-img-top"
+                                     width="100%"
+                                     height="225" alt="{{ post.name }}">
+                            {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                                    <text x="35%" y="50%" fill="#eceeef" dy=".3em">Нет фотографий</text>
+                                </svg>
+                            {% endif %}
+                            <div class="card-body">
+
+                                <p class="card-text">{{ post.description|truncatechars:10 }} (<a
+                                            href="{% url 'post_detail' post.pk %}"
+                                            style="font-size: 15px">Подробнее</a>)
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-body-secondary">{{ post.Profile.user.first_name }} {{ post.Profile.user.last_name }}</small>
+                                    <small class="text-body-secondary">{{ post.date_post }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                        </div>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% endif %}
+                {% endfor %}
+                </div>
+        </div>
+    </div>
+
+    {% if user.is_superuser %}
+        <div class="d-flex justify-content-center">
+            <p align="center">
+                <button type="" class="btn btn-secondary">Добавить мероприятие</button>
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+
+<div class="container px-4">
+<div class="d-flex justify-content-center">
+<div class="card" style="width: 450px; padding: 10px">
+<div class="card-body">
+<div class="form-group">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+{% for f in form %}
+<p ><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+<div class="form-error">{{ f.errors }}</div>
+{% endfor %}
+        <button class="btn btn-secondary">Авторизоваться</button>
+        </div>
+    </form>
+</div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for event in object_list %}
+                    <div class="col" style="margin-bottom: 10px">
+                        <div class="card shadow-sm">
+                            {% if event.Event.image %}
+                                <img src="{{ event.Event.image.url }}" class="bd-placeholder-img card-img-top"
+                                     width="100%"
+                                     height="225" alt="{{ event.Event.name }}">
+                            {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">123</text>
+                                </svg>
+                            {% endif %}
+                            <div class="card-body">
+
+                                <p class="card-text"><strong>{{ event.Event.EventType.name }}
+                                    <br>"{{ event.Event.name }}"</strong> <br style="font-size: 15px">
+                                    {% if event.Event.team %}Командное
+                                        мероприятие{% endif %} <br>{{ event.Event.description|truncatechars:9 }} (<a
+                                            href="#"
+                                            style="font-size: 15px">Подробнее</a>)
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{% url 'invitation' event.pk %}" type="button"
+                                           class="btn btn-sm btn-outline-secondary">Подать
+                                            заявку
+                                        </a>
+                                    </div>
+                                    <small class="text-body-secondary">{{ event.Date_Plan }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                        </div>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% endif %}
+                {% endfor %}
+                </div>
+        </div>
+        {% if user.is_superuser %}
+            <div class="d-flex justify-content-center">
+                <p align="center">
+                    <a href="{% url 'create_event' %}" type="button" class="btn btn-secondary">Добавить мероприятие</a>
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+    <div class="container px-4">
+        <div class="d-flex justify-content-center">
+            <div class="card" style="width: 600px; padding: 30px">
+                <div class="card-body">
+                    <h3 align="center" style="padding-bottom: 10px"><strong>Регистрация</strong></h3>
+                    <div class="form-group">
+                        <form method="post" action="#">
+                            {% csrf_token %}
+                            <p><label
+                                    style="padding-left: 120px; padding-right: 7px">
+                                Фамилия*: </label> {{ form.last_name }}
+                            </p>
+                            <p><label
+                                    style="padding-left: 165px; padding-right: 7px">
+                                Имя*: </label> {{ form.first_name }}
+                            </p>
+                            <p><label
+                                    style="padding-right: 7px">
+                                Отчество (при наличии): </label> {{ form.patronymic }}
+                            </p>
+                            <p><label
+                                    style="padding-right: 7px; padding-left: 155px">
+                                Класс*: </label> {{ form.klass }}
+                            </p>
+                            <p><label
+                                    style="padding-right: 7px; padding-left: 150px">
+                                E-mail*: </label> {{ form.email }}
+                            </p>
+                            <p><label
+                                    style="padding-right: 7px; padding-left: 148px">
+                                Логин*: </label> {{ form.username }}
+                            </p>
+
+
+                            <p><label style="padding-right: 7px; padding-left: 138px">
+                                Пароль*: </label> {{ form.password1 }}
+                            </p>
+                            <p><label for="{{ f.id_for_label }}"
+                                      style="padding-right: 7px; padding-left: 72px">
+                                Повтор пароля*: </label> {{ form.password2 }}
+                            </p>
+                            <p align="center" style="font-size: 20px">{{ form.agree }} {{ form.agree.help_text }}</p>
+                            <p align="center">
+                                <button type="submit" class="btn btn-secondary">Зарегистрироваться</button>
+                            </p>
+                            <p style="font-size: 13px">* - Поля обязательные для заполнения.</p>
+                            <p style="font-size: 13px">** - <a href="#" style="font-size: 13px; margin: 5px">Согласие на обработку персональных данных</a></p>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
