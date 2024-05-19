@@ -8,10 +8,64 @@
                     <h3 align="center" style="padding-bottom: 10px"><strong>Добавление нового мероприятия</strong></h3>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Create</button>
-                    </form>
 
+                        <p>
+                            <label for="{{ form.name.id_for_label }}">Название:</label>
+                            {{ form.name }}
+                            {% if form.name.help_text %}
+                                <small>{{ form.name.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        <p>
+                            <label for="{{ form.description.id_for_label }}">Описание:</label>
+                         <textarea name="description" id="description " required
+                                      style="width: 100%; height: 150px"></textarea></p>
+                            {% if form.description.help_text %}
+                                <small>{{ form.description.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            <label for="{{ form.EventType.id_for_label }}">Тип мероприятия:</label>
+                            {{ form.EventType }}
+                            {% if form.EventType.help_text %}
+                                <small>{{ form.EventType.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            <label for="{{ form.EducationLevel.id_for_label }}">Уровень образования:</label>
+                            {{ form.EducationLevel }}
+                            {% if form.EducationLevel.help_text %}
+                                <small>{{ form.EducationLevel.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        <p>
+                            <label for="{{ form.team.id_for_label }}"></label>
+                            {{ form.team }}
+                            {% if form.team.help_text %}
+                                {{ form.team.help_text }}
+                            {% endif %}
+                        </p>
+                        <p>
+                            <label for="{{ form.max_eventers.id_for_label }}">Максимальное количество
+                                участников:</label>
+                            {{ form.max_eventers }}
+                            {% if form.max_eventers.help_text %}
+                                <small>{{ form.max_eventers.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p style="">
+                            <label for="{{ form.image.id_for_label }}">Изображение:</label>
+                            {{ form.image }}
+                            {% if form.image.help_text %}
+                                <small>{{ form.image.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p align="center"><button type="submit" class="btn btn-secondary ">Добавить</button></p>
+                    </form>
                 </div>
             </div>
         </div>

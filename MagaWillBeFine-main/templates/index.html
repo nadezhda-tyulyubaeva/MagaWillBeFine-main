@@ -62,14 +62,15 @@
                                 class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
                                 href="{% url 'news' %}" style="padding: 10px;">Новости</a>
                         </li>
+
+                        <li class="u-nav-item"><a
+                                class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
+                                href="{% url 'results' %}" style="padding: 10px;">Итоги</a>
+                        </li>
                         {% if user.is_superuser %}
                             <li class="u-nav-item"><a
                                     class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-                                    href="ссылка" style="padding: 10px;">Рейтинг</a>
-                            </li>
-                            <li class="u-nav-item"><a
-                                    class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-                                    href="ссылка" style="padding: 10px;">Отчёты</a>
+                                    href="{% url 'reports' %}" style="padding: 10px;">Отчёты</a>
                             </li>
                             <li class="u-nav-item"><a
                                     class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
@@ -107,11 +108,12 @@
                                 <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                                           href="{% url 'news' %}">Новости</a>
                                 </li>
+
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                          href="{% url 'results' %}">Итоги</a>
+                                </li>
                                 {% if user.is_superuser %}
-                                    <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                              href="ссылка">Рейтинг</a>
-                                    </li>
-                                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="ссылка">Отчёты</a>
+                                    <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{% url 'reports' %}">Отчёты</a>
                                     </li>
                                     <li class="u-nav-item"><a class="u-button-style u-nav-link" href="ссылка">Методические
                                         разработки</a>

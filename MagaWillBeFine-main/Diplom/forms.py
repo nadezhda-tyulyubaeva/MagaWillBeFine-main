@@ -64,7 +64,22 @@ class InvitationForm(forms.ModelForm):
             del self.fields['Team']
             del self.fields['Team_Members']
 
+
 class EventForm(forms.ModelForm):
+    team = forms.BooleanField(label_suffix=' ', label=' ',
+                              help_text='Командное мероприятие.')
+    name = forms.CharField(label='Название', max_length=254, widget=forms.TextInput(
+        attrs={
+            'style': 'width:100%'
+        })
+    )
+
     class Meta:
         model = Event
         fields = ['name', 'max_eventers', 'image', 'description', 'team', 'EventType', 'EducationLevel']
+
+class EventPlanPositionForm(forms.ModelForm):
+    class Meta:
+        model = Event_Plan_Position
+        fields = ['Event_Plan', 'Event', 'Date', 'Date_Plan', 'Description', 'Eventers_Plan', 'Date_Fact', 'Eventers_Fact']
+

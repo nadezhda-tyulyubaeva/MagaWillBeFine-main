@@ -4,11 +4,13 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.timezone import now
 from django.views import generic, View
 from django.urls import reverse_lazy
 from .forms import *
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import *
+import calendar
 
 
 def index(request):
@@ -71,6 +73,7 @@ def registrat(request):
 
         if form.is_valid():
             user = form.save()
+            user.save()
 
             profile = Profile.objects.create(user=user, klass=form.cleaned_data['klass'],
                                              patronymic=form.cleaned_data['patronymic'])
@@ -89,6 +92,28 @@ class EventView(ListView):
 class NewView(ListView):
     model = Post
     template_name = 'news.html'
+
+def ReportView(request):
+    status_invitation = InvitationStatus.objects.filter(Status__name='Посещено').order_by('Invitation__Event_Plan_Position__Event__name')
+    positions = Event_Plan_Position.objects.all()
+
+    for invitation in status_invitation:
+        if invitation.Invitation.Team:
+            team_members = Team_Members.objects.filter(Team_List__Team=invitation.Invitation.Team)
+
+    context = {
+        'status_invitation': status_invitation,
+        'positions': positions,
+        'team_members': team_members,
+    }
+    return render(request, 'reports.html', context)
+
+class ResultsView(ListView):
+    model = Results
+    template_name = 'results.html'
+
+    def get_queryset(self):
+        return Results.objects.all().order_by('Invitation__Event_Plan_Position__Event__name')
 
 class PostDetailView(DetailView):
     model = Post
@@ -196,7 +221,39 @@ def create_event(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('posts')  # Перенаправьте на вашу страницу успешного создания мероприятия
+            return redirect('posts')
     else:
         form = EventForm()
     return render(request, 'create_event.html', {'form': form})
+
+class EventPlanPositionCreateView(View):
+    def get(self, request):
+        form = EventPlanPositionForm()
+        return render(request, 'create_event_plan.html', {'form': form})
+
+    def post(self, request):
+        form = EventPlanPositionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts')
+        return render(request, 'create_event_plan.html', {'form': form})
+
+class MonthlyEventPlanView(ListView):
+    model = Event_Plan_Position
+    template_name = 'monthly_event_plan.html'
+    context_object_name = 'event_plan_positions'
+
+    def get_queryset(self):
+        current_date = now()
+        first_day_of_month = current_date.replace(day=1)
+        last_day_of_month = current_date.replace(day=calendar.monthrange(current_date.year, current_date.month)[1])
+        return Event_Plan_Position.objects.filter(
+            Event_Plan__Date_Start__lte=last_day_of_month,
+            Event_Plan__Date_End__gte=first_day_of_month
+        ).order_by('Date_Plan')
+
+class EventPlanPositionUpdateView(UpdateView):
+    model = Event_Plan_Position
+    form_class = EventPlanPositionForm
+    template_name = 'edit_event_plan_position.html'
+    success_url = 'posts'

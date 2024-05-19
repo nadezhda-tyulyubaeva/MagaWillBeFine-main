@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container px-4">
+        <div class="d-flex justify-content-center">
+            <div class="card" style="width: 100%; height: 100%; padding: 30px">
+                <div class="card-body">
+                    <h3 align="center" style="padding-bottom: 10px"><strong>Редактирование мероприятия</strong></h3>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <p align="center">
+                            <label for="{{ form.name.id_for_label }}" style="padding-left: 185px; padding-right: 10px">Мероприятие:</label>
+                            {{ form.Event }}
+                            {% if form.Event.help_text %}
+                                <small>{{ form.Event.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        <p align="center">
+                            <label for="{{ form.description.id_for_label }}" style="padding-left: 220px; padding-right: 10px">План:</label>
+                            {{ form.Event_Plan }}
+                            {% if form.Event_Plan.help_text %}
+                                <small>{{ form.Event_Plan.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p align="center">
+                            <label for="{{ form.EventType.id_for_label }}" style="padding-left: 60px; padding-right: 10px">Плановая дата проведения:</label>
+                            {{ form.Date_Plan }}
+                            {% if form.Date_Plan.help_text %}
+                                <small>{{ form.Date_Plan.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p align="center">
+                            <label for="{{ form.EducationLevel.id_for_label }}" style="padding-right: 10px">Плановое количество участников:</label>
+                            {{ form.Eventers_Plan }}
+                            {% if form.Eventers_Plan.help_text %}
+                                <small>{{ form.Eventers_Plan.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        <p align="center">
+                            <label for="{{ form.Date_Fact.id_for_label }}" style="padding-left: 146px; padding-right: 10px">Дата проведения:</label>
+                            {{ form.Date_Fact }}
+                            {% if form.Date_Fact.help_text %}
+                                <small>{{ form.Date_Fact.help_text }}</small>
+                            {% endif %}
+                        </p>
+
+                        <p align="center">
+                            <label for="{{ form.Eventers_Fact.id_for_label }}" style="padding-left: 90px; padding-right: 10px">Количество участников:</label>
+                            {{ form.Eventers_Fact }}
+                            {% if form.Eventers_Fact.help_text %}
+                                <small>{{ form.Eventers_Fact.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        <p align="center">
+                            <button type="submit" class="btn btn-secondary ">Добавить</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

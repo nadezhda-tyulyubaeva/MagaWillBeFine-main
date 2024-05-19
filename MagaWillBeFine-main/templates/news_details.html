@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container px-4">
+    <div class="container px-4" xmlns="http://www.w3.org/1999/html">
         <div class="d-flex justify-content-center">
             <div class="card" style="width: 100%; height: 100%; padding: 30px">
                 <div class="card-body">
@@ -28,20 +28,29 @@
                     <h5><strong>Комментарии пользователей</strong></h5>
                     {% for feedback in feedbacks %}
                         <div>
-                            <p><strong>{{ feedback.Profile.user.first_name }} {{ feedback.Profile.user.last_name }}</strong> ({{ feedback.Time_Submit|date:"d.m.Y H:i" }}):
+                            <p>
+                                <strong>{{ feedback.Profile.user.first_name }} {{ feedback.Profile.user.last_name }}</strong>
+                                ({{ feedback.Time_Submit|date:"d.m.Y H:i" }}):
                             </p>
                             <p>{{ feedback.Feedback }}</p>
                         </div>
                         <hr>
                     {% endfor %}
-                    <h5><strong>Оставить комментарий</strong></h5>
-                    <form method="post">
-                        {% csrf_token %}
-                        <p>
-                            <textarea name="Feedback" id="Feedback" required style="width: 100%; height: 150px" ></textarea></p>
 
-                        <p align="right"><button type="submit" class="btn btn-secondary">Отправить</button></p>
-                    </form>
+                    <h5><strong>Оставить комментарий</strong></h5>
+                    {% if user.is_authenticated %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <p>
+                            <textarea name="Feedback" id="Feedback" required
+                                      style="width: 100%; height: 150px"></textarea></p>
+
+                            <p align="right">
+                                <button type="submit" class="btn btn-secondary">Отправить</button>
+                            </p>
+                        </form>
+                    {% endif %}
+                    <p style="font-size: 13px"><a href="{% url 'login' %}" style="font-size: 13px">Войдите</a> в систему, чтобы оставить комментарий.</p>
                 </div>
 
 

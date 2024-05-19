@@ -21,6 +21,11 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('invitation/<int:pk>/', InvitationView.as_view(), name='invitation'),
     path('create_event/', create_event, name='create_event'),
+    path('event-plan-position/new/', EventPlanPositionCreateView.as_view(), name='event_plan_position_create'),
+    path('event-plan/monthly/', MonthlyEventPlanView.as_view(), name='monthly_event_plan'),
+    path('event-plan-position/<int:pk>/edit/', EventPlanPositionUpdateView.as_view(), name='edit_event_plan_position'),
+    path('results/', ResultsView.as_view(), name='results'),
+    path('reports/', ReportView, name='reports'),
 ]
 
 if settings.DEBUG:

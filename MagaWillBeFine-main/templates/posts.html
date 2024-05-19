@@ -32,13 +32,30 @@
                                 </p>
 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href="{% url 'invitation' event.pk %}" type="button"
-                                           class="btn btn-sm btn-outline-secondary">Подать
-                                            заявку
-                                        </a>
-                                    </div>
+                                    {% if user.is_authenticated %}
+                                        <div class="btn-group">
+
+                                            <a href="{% url 'invitation' event.pk %}" type="button"
+                                               class="btn btn-sm btn-outline-secondary">Подать
+                                                заявку
+                                            </a>
+                                            {% if user.is_superuser %}
+                                                <a href="{% url 'edit_event_plan_position' event.pk %}" type="button"
+                                                   class="btn btn-sm btn-outline-secondary">Редактировать
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <small class="text-body-secondary"><a href="{% url 'login' %}"
+                                                                              style="font-size: 12px">Войдите</a> в
+                                            систему, чтобы подать
+                                            заявку</small>
+
+                                    {% endif %}
                                     <small class="text-body-secondary">{{ event.Date_Plan }}</small>
+                                    {% if  event.Date_Plan <= datetime.now %}
+                                        <small class="text-body-secondary">Мероприятие проведено.</small>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -54,6 +71,9 @@
             <div class="d-flex justify-content-center">
                 <p align="center">
                     <a href="{% url 'create_event' %}" type="button" class="btn btn-secondary">Добавить мероприятие</a>
+                    <a href="{% url 'event_plan_position_create' %}" type="button" class="btn btn-secondary">Добавить мероприятие в
+                        план</a>
+                    <a href="{% url 'monthly_event_plan' %}" type="button" class="btn btn-secondary">Открыть план мероприятий на текущий месяц</a>
                 </p>
             </div>
         {% endif %}
