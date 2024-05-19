@@ -83,3 +83,37 @@ class EventPlanPositionForm(forms.ModelForm):
         model = Event_Plan_Position
         fields = ['Event_Plan', 'Event', 'Date', 'Date_Plan', 'Description', 'Eventers_Plan', 'Date_Fact', 'Eventers_Fact']
 
+
+class CancelInvitationForm(forms.ModelForm):
+    class Meta:
+        model = InvitationStatus
+        fields = ['Status', 'Description']
+        widgets = {
+            'Description': forms.Textarea(attrs={'rows': 4, 'cols': 120})
+        }
+        labels = {
+            'Description': 'Причина отмены',
+            'Status': 'Измените статус'
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CancelInvitationForm, self).__init__(*args, **kwargs)
+        self.fields['Status'] = forms.ModelChoiceField(queryset=Status.objects.filter(name='Отменена'))
+        self.fields['Status'].label = 'Измените статус'
+
+class UpdateInvitationForm(forms.ModelForm):
+    class Meta:
+        model = InvitationStatus
+        fields = ['Status', 'Description']
+        widgets = {
+            'Description': forms.Textarea(attrs={'rows': 4, 'cols': 120})
+        }
+        labels = {
+            'Description': 'Комментарий',
+            'Status': 'Измените статус'
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateInvitationForm, self).__init__(*args, **kwargs)
+        self.fields['Status'].label = 'Измените статус'
+

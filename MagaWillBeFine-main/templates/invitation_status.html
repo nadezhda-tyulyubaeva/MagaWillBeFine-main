@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container px-4">
+        <div class="d-flex justify-content-center">
+            <div class="card" style="width: 100%; height: 100%; padding: 30px">
+                <div class="card-body">
+                    <h3 align="center" style="padding-bottom: 10px"><strong>Заявки на участие</strong></h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Участник/Команда</th>
+                            <th>Мероприятие</th>
+                            <th>Статус</th>
+                            <th>Комментарий</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in  object_list %}
+                            <tr>
+                                {% if event.Invitation.Team %}
+                                    <td>{{ event.Invitation.Team }}</td>
+                                {% else %}
+                                    <td>{{ event.Invitation.Profile.user.first_name }} {{ event.Invitation.Profile.user.last_name }} </td>
+                                {% endif %}
+                                <td>{{ event.Invitation.Event_Plan_Position.Event.EventType.name }}<br>
+                                    "{{ event.Invitation.Event_Plan_Position.Event.name }}"
+                                </td>
+                                <td>{{ event.Status.name }}</td>
+                                {% if event.Description %}
+                                    <td>{{ event.Description }}</td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}
+                                <td><a href="{% url 'invitation_status_update' event.pk %}" type="button" class="btn btn-secondary">Изменить</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

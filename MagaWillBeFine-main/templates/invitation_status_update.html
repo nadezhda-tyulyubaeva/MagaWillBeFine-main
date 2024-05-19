@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container px-4">
+        <div class="d-flex justify-content-center">
+            <div class="card" style="width: 100%; height: 100%; padding: 30px">
+                <div class="card-body">
+                    <h3 align="center" style="padding-bottom: 10px"><strong>Изменение статуса заявки</strong></h3>
+                    <p>Мероприятие: {{ invitation.Invitation.Event_Plan_Position.Event.EventType.name }} "{{ invitation.Invitation.Event_Plan_Position.Event.name }}"</p>
+                    {% if invitation.Invitation.Event_Plan_Position.Date_Fact %}
+                    <p>Проведено: {{ invitation.Invitation.Event_Plan_Position.Date_Fact }}</p>
+                    {% elif invitation.Invitation.Event_Plan_Position.Date_Plan %}
+                    <p>Планируется: {{ invitation.Invitation.Event_Plan_Position.Date_Plan }}</p>
+                    {% endif %}
+                    {% if invitation.Invitation.Team %}
+                    <p>Участник: {{ invitation.Invitation.Team}}</p>
+                    {% elif invitation.Invitation.Profile %}
+                    <p>Участник: {{ invitation.Invitation.Profile.user.first_name }} {{ invitation.Invitation.Profile.user.last_name }}</p>
+                    {% endif %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <p align="center">
+                            <button type="submit" class="btn btn-secondary ">Сохранить</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

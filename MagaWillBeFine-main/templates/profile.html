@@ -12,6 +12,8 @@
                     <strong>{{ user.last_name }} {{ user.first_name }} {{ profile.patronymic }}, {{ profile.klass }}
                         класс</strong></p>
                 <p align="center" style="margin: 1rem">{{ team.Team_List.Team.name }}, {{ capitan }}</p>
+            <hr>
+            <p align="center"> <a href="" type="button" class="btn btn-secondary">Редактировать профиль</a></p>
             </div>
 
             <div class="textcols-item">
@@ -23,6 +25,7 @@
                         <th>Плановая дата проведения</th>
                         <th>Статус</th>
                         <th>Комментарий</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +40,11 @@
                             {% else %}
                                 <td></td>
                             {% endif %}
-
+                            {% if status.Status.name == 'Отменена' %}
+                                <td></td>
+                            {% else %}
+                                 <td><a href="{% url 'cancel_invitation' status.pk %}" type="button" class="btn btn-secondary" style="background-color: red">Отменить заявку</a></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
 

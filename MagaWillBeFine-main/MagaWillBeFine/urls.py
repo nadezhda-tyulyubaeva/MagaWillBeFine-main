@@ -26,6 +26,9 @@ urlpatterns = [
     path('event-plan-position/<int:pk>/edit/', EventPlanPositionUpdateView.as_view(), name='edit_event_plan_position'),
     path('results/', ResultsView.as_view(), name='results'),
     path('reports/', ReportView, name='reports'),
+    path('cancel-invitation/<int:pk>/cancel/', cancel_invitation, name='cancel_invitation'),
+    path('invitation_status/', InvitationStatusView.as_view(), name='invitation_status'),
+    path('invitation_status_update/<int:pk>/update/', update_invitation, name='invitation_status_update'),
 ]
 
 if settings.DEBUG:

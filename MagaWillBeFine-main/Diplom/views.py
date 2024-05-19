@@ -140,6 +140,22 @@ class PostDetailView(DetailView):
         context['form'] = form
         return self.render_to_response(context)
 
+def cancel_invitation(request, pk):
+    invitation = get_object_or_404(InvitationStatus, pk=pk)
+    cancel_status = get_object_or_404(Status, name = 'Отменена')
+    if request.method == 'POST':
+        form = CancelInvitationForm(request.POST, instance=invitation)
+        if form.is_valid():
+            status = form.save(commit=False)
+            status.Invitation = invitation.Invitation
+            status.Profile = request.user.profile
+            status.Status.name = 'Отменена'
+            status.save()
+            return redirect('profile')
+    else:
+        form = CancelInvitationForm()
+
+    return render(request, 'cancel_invitation.html', {'form': form, 'invitation': invitation})
 
 class InvitationView(View):
     def get(self, request, pk):
@@ -257,3 +273,26 @@ class EventPlanPositionUpdateView(UpdateView):
     form_class = EventPlanPositionForm
     template_name = 'edit_event_plan_position.html'
     success_url = 'posts'
+
+class InvitationStatusView(ListView):
+    model = InvitationStatus
+    template_name = 'invitation_status.html'
+
+    def get_queryset(self):
+        return InvitationStatus.objects.all().order_by('Status__name','Invitation__Event_Plan_Position__Event__name')
+
+def update_invitation(request, pk):
+    invitation = get_object_or_404(InvitationStatus, pk=pk)
+
+    if request.method == 'POST':
+        form = UpdateInvitationForm(request.POST, instance=invitation)
+        if form.is_valid():
+            status = form.save(commit=False)
+            status.Invitation = invitation.Invitation
+            status.Profile = request.user.profile
+            status.save()
+            return redirect('invitation_status')
+    else:
+        form = UpdateInvitationForm()
+
+    return render(request, 'invitation_status_update.html', {'form': form, 'invitation': invitation})
