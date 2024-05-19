@@ -279,7 +279,7 @@ class InvitationStatusView(ListView):
     template_name = 'invitation_status.html'
 
     def get_queryset(self):
-        return InvitationStatus.objects.all().order_by('Status__name','Invitation__Event_Plan_Position__Event__name')
+        return InvitationStatus.objects.all().order_by('Invitation__Event_Plan_Position__Event__name', 'Status__name')
 
 def update_invitation(request, pk):
     invitation = get_object_or_404(InvitationStatus, pk=pk)
