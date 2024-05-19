@@ -49,8 +49,10 @@
                                 <button type="submit" class="btn btn-secondary">Отправить</button>
                             </p>
                         </form>
+                        {% else %}
+                        <p style="font-size: 13px"><a href="{% url 'login' %}" style="font-size: 13px">Войдите</a> в систему, чтобы оставить комментарий.</p>
                     {% endif %}
-                    <p style="font-size: 13px"><a href="{% url 'login' %}" style="font-size: 13px">Войдите</a> в систему, чтобы оставить комментарий.</p>
+
                 </div>
 
 

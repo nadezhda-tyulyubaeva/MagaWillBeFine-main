@@ -9,31 +9,31 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                        <p>
-                            <label for="{{ form.name.id_for_label }}">Мероприятие:</label>
+                        <p align="center">
+                            <label for="{{ form.name.id_for_label }}" style="padding-left: 190px; padding-right: 10px">Мероприятие:</label>
                             {{ form.Event }}
                             {% if form.Event.help_text %}
                                 <small>{{ form.Event.help_text }}</small>
                             {% endif %}
                         </p>
-                        <p>
-                            <label for="{{ form.description.id_for_label }}">План:</label>
+                        <p align="center">
+                            <label for="{{ form.description.id_for_label }}" style="padding-left: 218px; padding-right: 10px">План:</label>
                          {{ form.Event_Plan }}
                             {% if form.Event_Plan.help_text %}
                                 <small>{{ form.Event_Plan.help_text }}</small>
                             {% endif %}
                         </p>
 
-                        <p>
-                            <label for="{{ form.EventType.id_for_label }}">Плановая дата проведения:</label>
+                        <p align="center">
+                            <label for="{{ form.EventType.id_for_label }}" style="padding-left: 55px; padding-right: 10px">Плановая дата проведения:</label>
                             {{ form.Date_Plan }}
                             {% if form.Date_Plan.help_text %}
                                 <small>{{ form.Date_Plan.help_text }}</small>
                             {% endif %}
                         </p>
 
-                        <p>
-                            <label for="{{ form.EducationLevel.id_for_label }}">Плановое количество участников:</label>
+                        <p align="center">
+                            <label for="{{ form.EducationLevel.id_for_label }}" style="padding-right: 10px">Плановое количество участников:</label>
                             {{ form.Eventers_Plan }}
                             {% if form.Eventers_Plan.help_text %}
                                 <small>{{ form.Eventers_Plan.help_text }}</small>
